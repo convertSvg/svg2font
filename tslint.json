@@ -1,0 +1,27 @@
+{
+  "rules":  {
+    "jsx-self-close": true,
+    "object-literal-sort-keys": false,
+    "interface-name" : [true, "never-prefix"],
+    "array-type": false,
+    "ordered-imports": false,
+    "jsx-no-lambda": false,
+    "member-access": false,
+    "no-empty": false,
+    "no-console": false,
+    "type-literal-delimiter": false
+  },
+  "jsRules": { //Disable for javascript
+    "object-literal-sort-keys": false,
+    "no-empty": false,
+    "no-console": false
+  },
+  "extends": ["tslint:recommended", "tslint-react", "tslint-config-prettier"],
+  "linterOptions": {
+    "exclude": [
+      "config/**/*.js",
+      "node_modules/**/*.ts",
+      "coverage/lcov-report/*.js"
+    ]
+  }
+}
