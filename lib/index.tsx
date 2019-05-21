@@ -18,13 +18,15 @@ const getFileList = (pattern, options = {}) => {
   return promise
 }
 
-export default async function svg2Font({
+async function svg2Font({
   src = '',
   dist = '',
   fontName = 'svg2font',
   startCodePoint = 57344,
   ascent = 896,
   descent = -128,
+  css = true,
+  fontTypes = ['eot', 'woff2', 'woff', 'ttf', 'svg'],
 }) {
 
   // const files = Glob.sync(src, {}) || []
@@ -45,7 +47,7 @@ export default async function svg2Font({
     startCodePoint,
   })
 
-  return font.convertFonts({dist, fontName})
+  return font.convertFonts({dist, fontTypes, css})
 }
-
+export { svg2Font, Font }
 

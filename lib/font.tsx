@@ -85,6 +85,8 @@ export default class Font {
         const d = this.getGlyphData(data, ascent)
         glyphs.push({ unicode: unicodes[idx], d, horizAdvX: 1024, vertAdvY: 1024})
       })
+
+      return glyphs
     }
 
     if(Object.prototype.toString.call(glyphSvgs) === '[object Object]'){
@@ -94,9 +96,17 @@ export default class Font {
         const d = this.getGlyphData(glyphSvgs[glyphName], ascent)
         glyphs.push({ unicode: unicodes[idx], d, horizAdvX: 1024, vertAdvY: 1024, glyphName})
       })
+
+      return glyphs
     }
 
-    return glyphs
+    if(typeof glyphSvgs === 'string'){
+
+      const unicodes = createUnicodes(1, startCodePoint)
+      const d = this.getGlyphData(glyphSvgs, ascent)
+      glyphs.push({ unicode: unicodes[0], d, horizAdvX: 1024, vertAdvY: 1024})
+      return glyphs
+    }
   }
 
   getGlyphData (data, ascent) {
@@ -137,19 +147,25 @@ export default class Font {
     return ttf2woff2(ttfBuffer)
   }
 
-  convertFonts ({dist = './', fontTypes = ['eot', 'woff2', 'woff', 'ttf', 'svg'], fontName = 'svg2font', css = true}) {
+  convertFonts ({dist = './', fontTypes = ['eot', 'woff2', 'woff', 'ttf', 'svg'], css = true}) {
+    const fontName = this.fontName
     fontTypes.map( format => {
       switch (format) {
         case 'svg':
-            fs.writeFileSync(path.join(dist, `${fontName}.svg`), this.getGlyph())
+          fs.writeFileSync(path.join(dist, `${fontName}.svg`), this.getGlyph())
+          break;
         case 'ttf':
-            fs.writeFileSync(path.join(dist, `${fontName}.ttf`), this.getTTF())
+          fs.writeFileSync(path.join(dist, `${fontName}.ttf`), this.getTTF())
+          break;
         case 'eot':
-            fs.writeFileSync(path.join(dist, `${fontName}.eot`), this.getEOT())
+          fs.writeFileSync(path.join(dist, `${fontName}.eot`), this.getEOT())
+          break;
         case 'woff':
-            fs.writeFileSync(path.join(dist, `${fontName}.woff`), this.getWOFF())
+          fs.writeFileSync(path.join(dist, `${fontName}.woff`), this.getWOFF())
+          break;
         case 'woff2':
-            fs.writeFileSync(path.join(dist, `${fontName}.woff2`), this.getWOFF2())
+          fs.writeFileSync(path.join(dist, `${fontName}.woff2`), this.getWOFF2())
+          break;
       }
     })
 

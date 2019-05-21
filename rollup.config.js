@@ -3,7 +3,7 @@ import commonjs from 'rollup-plugin-commonjs'
 import resolve from 'rollup-plugin-node-resolve'
 
 export default {
-  input: './index.tsx',
+  input: './lib/index.tsx',
   perf: true,
   output: {
     file: 'dist/index.js',
