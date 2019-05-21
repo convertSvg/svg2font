@@ -1,5 +1,7 @@
 ## svg2font
-svg -> svgfont -> ttf 
+
+Converts SVG to TTF/EOT/WOFF/WOFF2/SVG format.
+> Note: svg -> svgfont -> ttf  ttf -> EOT ttf -> WOFF ttf -> WOFF2 ttf -> svg，[DominantBaselineProperty](https://www.w3.org/TR/SVG/text.html#DominantBaselineProperty), [FontElementAscentAttribute](https://www.w3.org/TR/1999/WD-SVG-19991203/fonts.html#FontElementAscentAttribute)
 
 ## Unicode字符平面映射
 
@@ -22,13 +24,71 @@ svg -> svgfont -> ttf
 npm install svg2font
 ```
 
+## Usage
+
+```
+const { svg2Font, Font, writeToFile } = require('./dist/index.js')
+const path = require('path')
+const fs = require('fs')
+
+svg2Font({
+  src: './test/svgicon/*.svg', // svg path  support patterns
+  dist: './test/',
+  fontName: 'svg2font',  // font name
+  startCodePoint: 57344, // unicode start code point
+  ascent: 924,
+  descent: -100,
+  css: true,
+}).then(() => {
+  console.log('svg2Font done !')
+})
+
+const icon = fs.readFileSync(path.join( './test/svgicon', `icon_7days.svg`), 'utf8')
+
+const font = new Font({
+  fontName: 'svgfont',
+  glyphSvgs: icon,  //  support string array object
+  ascent: 896,
+  descent: -128,
+  startCodePoint: 57344,
+})
+
+font.convertFonts({
+  dist: './test/',
+  fontTypes: ['eot', 'ttf', 'svg'],
+  css: true,
+})
+
+```
+## API
+
+### svg2Font(options)
+- `options`
+  - `src`- SVG file 
+  - `dist` - out file
+  - `fontName` - font family name
+  - `startCodePoint` - Unicode Private Use Areas start Code Point
+  - `ascent`
+  - `descent`
+
+### new Font(options)
+- `options`
+  - `fontName` - font family name
+  - `glyphSvgs` - svg datas support string array object
+  - `startCodePoint` - Unicode Private Use Areas start Code Point
+  - `ascent`
+  - `descent`
+
+- `method`
+  - `getGlyph`
+  - `getTTF`
+  - `getWOFF`
+  - `getWOFF2`
+  - `convertFonts`
+
 ## Features
 
-- 支持创建一个空白字体
-- 支持解析已有字体(ttf，SVG)
-- 支持使用 SVG来设置字的展现
-- 支持解析 SVG的各种转换还有各种非 path 图形
-- 支持针对某一个字，导出对应的 SVG
+- 支持解析 SVG 基本路径转换
 - 支持导出四种浏览器主流字体（ttf，eot，woff，woff2, svg）
 - 支持设置各种字体相关内容
 
