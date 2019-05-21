@@ -37,15 +37,20 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com:convertSvg/svg-path-parse.git"
+    "url": "git+ssh://git@github.com:convertSvg/svg2font.git"
   },
   "keywords": [
     "convert path",
     "path",
-    "normalise SVG paths"
+    "normalise SVG paths",
+    "ttf",
+    "eot",
+    "glyph",
+    "woff",
+    "woff2"
   ],
   "bugs": {
-    "url": "https://github.com/convertSvg/svg-path-parse/issues"
+    "url": "https://github.com/convertSvg/svg2font/issues"
   },
-  "homepage": "https://github.com/convertSvg/svg-path-parse"
+  "homepage": "https://github.com/convertSvg/svg2font"
 }
