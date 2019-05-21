@@ -1,4 +1,4 @@
-## svg2font
+## svg-to-fonts
 
 Converts SVG to TTF/EOT/WOFF/WOFF2/SVG format.
 > Note: svg -> svgfont -> ttf  ttf -> EOT ttf -> WOFF ttf -> WOFF2 ttf -> svg，[DominantBaselineProperty](https://www.w3.org/TR/SVG/text.html#DominantBaselineProperty), [FontElementAscentAttribute](https://www.w3.org/TR/1999/WD-SVG-19991203/fonts.html#FontElementAscentAttribute)
@@ -21,7 +21,7 @@ Converts SVG to TTF/EOT/WOFF/WOFF2/SVG format.
 ## Install 
 
 ```
-npm install svg2font
+npm install svg-to-fonts
 ```
 
 ## Usage
