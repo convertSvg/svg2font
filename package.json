@@ -1,5 +1,5 @@
 {
-  "name": "svg2font",
+  "name": "svg2Font",
   "version": "0.0.1",
   "description": "Converts SVG to font format.",
   "main": "./dist/index.js",
@@ -37,7 +37,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com:convertSvg/svg2font.git"
+    "url": "git+ssh://git@github.com:convertSvg/svg2Font.git"
   },
   "keywords": [
     "convert path",
@@ -50,7 +50,7 @@
     "woff2"
   ],
   "bugs": {
-    "url": "https://github.com/convertSvg/svg2font/issues"
+    "url": "https://github.com/convertSvg/svg2Font/issues"
   },
-  "homepage": "https://github.com/convertSvg/svg2font"
+  "homepage": "https://github.com/convertSvg/svg2Font"
 }
