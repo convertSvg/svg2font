@@ -12,7 +12,6 @@ import { unicodeToCodePoint } from './utils'
  * @param {*} startCodePoint 起始码点值
  */
 export default function createUnicodes (num: number = 0, startCodePoint: number  = 57344): Array<string> {
-  console.error('startCodePoint', unicodeToCodePoint('E000'))
     if(
         !(
           (startCodePoint - unicodeToCodePoint('E000') >= 0 &&  unicodeToCodePoint('F8FF') - startCodePoint - num >= 0) ||

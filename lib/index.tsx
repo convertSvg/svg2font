@@ -1,53 +1,51 @@
 const Glob = require("glob")
-const xmldom = require('xmldom')
-const DOMParser = xmldom.DOMParser // 解析为文档对象
-const XMLSerializer = xmldom.XMLSerializer // XML序列化
 const path = require('path')
 
-import { readToFile } from './utils'
+import { readToFile, readStreamToFile } from './utils'
 import createUnicodes from './unicodes'
 import Font from './font'
 
 const getFileList = (pattern, options = {}) => {
   const promise = new Promise((resolve, reject) => {
-    Glob(pattern, options, function (err, files) {
-      if(err)reject(err)
+    Glob(pattern, options, (err, files:string[]) => {
+      if(err){
+        console.error(err)
+        reject([])
+      }
       resolve(files)
     })
   })
   return promise
 }
 
-const svg2Font = ({
+export default async function svg2Font({
   src = '',
   dist = '',
   fontName = 'svg2font',
-  startCodePoint = 57344
-}) => {
-  const files = Glob.sync(src, {}) || []
-  const glyphs = {}
-  let len = files.length
-  const unicodes = createUnicodes(len, startCodePoint)
-  while(len){
-    len--;
-    const data:any = readToFile(files[len])
-    const glyphName = path.basename(files[len]).split('.')[0]
-    const Node = new DOMParser().parseFromString(data, 'application/xml')
-    Array.from(Node.documentElement.childNodes).map( (node:any) => {
-      if (node.nodeName.toUpperCase() === 'PATH' && node.hasAttribute && node.hasAttribute('d')) {
-          const d = node.getAttribute('d')
-          glyphs[glyphName] = { unicode: unicodes[len], d, horizAdvX: 1024, vertAdvY: 1024}
-      }
-    })
+  startCodePoint = 57344,
+  ascent = 896,
+  descent = -128,
+}) {
+
+  // const files = Glob.sync(src, {}) || []
+  const files = await getFileList(src)
+  const glyphSvgs = {}
+
+  for(let i = 0, len = files.length; i< len; i++){
+    const data:any = await readStreamToFile(files[i])
+    const glyphName = path.basename(files[i]).split('.')[0]
+    glyphSvgs[glyphName] = data
   }
 
   const font = new Font({
     fontName,
-    glyphs,
-    dist,
+    glyphSvgs,
+    ascent,
+    descent,
+    startCodePoint,
   })
 
-  return font
+  return font.convertFonts({dist, fontName})
 }
 
-export default svg2Font
+
