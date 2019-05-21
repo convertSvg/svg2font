@@ -1,4 +1,4 @@
-## svg-to-fonts
+## svg2Font
 
 Converts SVG to TTF/EOT/WOFF/WOFF2/SVG format.
 > Note: svg -> svgfont -> ttf  ttf -> EOT ttf -> WOFF ttf -> WOFF2 ttf -> svg，[DominantBaselineProperty](https://www.w3.org/TR/SVG/text.html#DominantBaselineProperty), [FontElementAscentAttribute](https://www.w3.org/TR/1999/WD-SVG-19991203/fonts.html#FontElementAscentAttribute)
