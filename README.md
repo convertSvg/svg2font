@@ -18,6 +18,8 @@ Converts SVG to TTF/EOT/WOFF/WOFF2/SVG format.
 
 > Unicode 字符三个私人使用区(Private Use Areas)：一个在基本多语言平面（U+E000-U+F8FF）中，另外两个几乎包含了整个第15和第16平面（分别为U+F0000-U+FFFFD，U+100000-U+10FFFD）
 
+> ie下面渲染不出unicode，使用16进制unicode的时候 加上;号，否则ie无法将它解析。10进制的没这个问题，现在大部分字体都是使用16进制标志的，主要是为了方便移动端，还有css3的那种写法。
+
 ## Install 
 
 ```
