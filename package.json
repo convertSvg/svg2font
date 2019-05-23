@@ -1,6 +1,6 @@
 {
   "name": "svg-to-fonts",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "Converts SVG to font format.",
   "main": "./dist/index.js",
   "scripts": {
@@ -14,26 +14,28 @@
   "author": "pfan",
   "license": "ISC",
   "dependencies": {
-    "@commitlint/cli": "^7.6.1",
-    "@commitlint/config-conventional": "^7.6.0",
     "convertpath": "^1.1.6",
     "glob": "^7.1.4",
-    "husky": "^2.2.0",
     "lodash": "^4.17.11",
-    "rollup": "^1.11.3",
-    "rollup-plugin-commonjs": "^9.3.4",
-    "rollup-plugin-node-resolve": "^4.2.4",
-    "rollup-plugin-typescript": "^1.0.1",
     "svg2ttf": "^4.2.0",
     "svgpath": "^2.2.2",
-    "tslib": "^1.9.3",
-    "tslint": "^5.16.0",
     "ttf2eot": "^2.0.0",
     "ttf2svg": "^1.2.0",
     "ttf2woff": "^2.0.1",
     "ttf2woff2": "^2.0.3",
-    "typescript": "^3.4.5",
     "xmldom": "^0.1.27"
+  },
+  "peerDependencies": {
+    "husky": "^2.2.0",
+    "@commitlint/cli": "^7.6.1",
+    "@commitlint/config-conventional": "^7.6.0",
+    "rollup": "^1.11.3",
+    "rollup-plugin-commonjs": "^9.3.4",
+    "rollup-plugin-node-resolve": "^4.2.4",
+    "rollup-plugin-typescript": "^1.0.1",
+    "typescript": "^3.4.5",
+    "tslib": "^1.9.3",
+    "tslint": "^5.16.0"
   },
   "repository": {
     "type": "git",
