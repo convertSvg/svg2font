@@ -26,16 +26,16 @@
     "xmldom": "^0.1.27"
   },
   "peerDependencies": {
-    "husky": "^2.2.0",
     "@commitlint/cli": "^7.6.1",
     "@commitlint/config-conventional": "^7.6.0",
+    "husky": "^2.2.0",
     "rollup": "^1.11.3",
     "rollup-plugin-commonjs": "^9.3.4",
     "rollup-plugin-node-resolve": "^4.2.4",
     "rollup-plugin-typescript": "^1.0.1",
-    "typescript": "^3.4.5",
     "tslib": "^1.9.3",
-    "tslint": "^5.16.0"
+    "tslint": "^5.16.0",
+    "typescript": "^3.4.5"
   },
   "repository": {
     "type": "git",
@@ -54,5 +54,8 @@
   "bugs": {
     "url": "https://github.com/convertSvg/svg-to-fonts/issues"
   },
-  "homepage": "https://github.com/convertSvg/svg-to-fonts"
+  "homepage": "https://github.com/convertSvg/svg-to-fonts",
+  "devDependencies": {
+    "@bazel/ibazel": "^0.10.3"
+  }
 }

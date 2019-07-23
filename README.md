@@ -29,7 +29,7 @@ npm install svg-to-fonts
 ## Usage
 
 ```
-const { svg2Font, Font, writeToFile } = require('./dist/index.js')
+const { svg2Font, Font, writeToFile } = require('svg-to-fonts')
 const path = require('path')
 const fs = require('fs')
 
