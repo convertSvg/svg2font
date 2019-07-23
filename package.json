@@ -25,7 +25,7 @@
     "ttf2woff2": "^2.0.3",
     "xmldom": "^0.1.27"
   },
-  "peerDependencies": {
+  "devDependencies": {
     "@commitlint/cli": "^7.6.1",
     "@commitlint/config-conventional": "^7.6.0",
     "husky": "^2.2.0",
@@ -54,8 +54,5 @@
   "bugs": {
     "url": "https://github.com/convertSvg/svg-to-fonts/issues"
   },
-  "homepage": "https://github.com/convertSvg/svg-to-fonts",
-  "devDependencies": {
-    "@bazel/ibazel": "^0.10.3"
-  }
+  "homepage": "https://github.com/convertSvg/svg-to-fonts"
 }

@@ -71,7 +71,6 @@ export default class Font {
       },
       glyphs: this.glyphs,
     })
-
     this.svgFont = fontTemplate(DEFAULT_CONFIG)
   }
 
@@ -149,6 +148,7 @@ export default class Font {
 
   convertFonts ({dist = './', fontTypes = ['eot', 'woff2', 'woff', 'ttf', 'svg'], css = true}) {
     const fontName = this.fontName
+    const glyphs = this.glyphs
     fontTypes.map( format => {
       switch (format) {
         case 'svg':
@@ -170,7 +170,7 @@ export default class Font {
     })
 
     if(css && fontTypes.length > 0){
-      const CSSTMPL =fontCSSTemplate(fontTypes, fontName)
+      const CSSTMPL =fontCSSTemplate(fontTypes, fontName, glyphs)
       fs.writeFileSync(path.join(dist, `${fontName}.css`), CSSTMPL)
     }
   }

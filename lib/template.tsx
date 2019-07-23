@@ -14,7 +14,7 @@ export function fontTemplate(DEFAULT_CONFIG) {
         <font id="${font.id}" horiz-adv-x="${font.horizAdvX}" vert-adv-y="${font.vertAdvY}" >
           <font-face font-family="${fontface.fontFamily}" font-weight="${fontface.fontWeight}" font-stretch="${fontface.fontStretch}" units-per-em="${fontface.unitsPerEm}" ascent="${fontface.ascent}" descent="${fontface.descent}" />
           <missing-glyph />${ glyphs.map(glyph => `
-          <glyph ${glyph.glyphName ? (`glyph-name="${glyph.glyphName}" `):''}unicode="${glyph.unicode}" d="${glyph.d}" horiz-adv-x="${glyph.horizAdvX}" vert-adv-y="${glyph.vertAdvY}" />`).join('')}
+          <glyph ${glyph.glyphName ? (`glyph-name="${glyph.glyphName}" `):''}unicode="&#x${glyph.unicode};" d="${glyph.d}" horiz-adv-x="${glyph.horizAdvX}" vert-adv-y="${glyph.vertAdvY}" />`).join('')}
         </font>
       </defs>
     </svg>`
@@ -22,7 +22,7 @@ export function fontTemplate(DEFAULT_CONFIG) {
 }
 
 
-export function fontCSSTemplate(fontTypes, fontName) {
+export function fontCSSTemplate(fontTypes, fontName, glyphs = []) {
   const CSSTMPL = `
   @font-face {
     font-family: '${fontName}';
@@ -48,6 +48,10 @@ export function fontCSSTemplate(fontTypes, fontName) {
     font-style: normal;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-  }`
+  }
+  ${ glyphs.map(({glyphName, unicode}) => `
+  .${glyphName}:before {
+    content: "\\${unicode}";
+  }`).join('\n')}`
   return CSSTMPL
 }

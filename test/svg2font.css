@@ -16,3 +16,19 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+  
+  .icon_7days:before {
+    content: "\e000";
+  }
+
+  .icon_hour:before {
+    content: "\e001";
+  }
+
+  .icon_postage:before {
+    content: "\e002";
+  }
+
+  .icon_stop7days:before {
+    content: "\e003";
+  }

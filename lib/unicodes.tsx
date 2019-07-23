@@ -10,8 +10,9 @@ import { unicodeToCodePoint } from './utils'
  * 生成私人区 unicode
  * @param {*} num 需要 unicode 字符个数
  * @param {*} startCodePoint 起始码点值
+ * @param {*} type 若取值为 '&#x' 则返回为 &#x40000; 格式，反之返回16进制码点
  */
-export default function createUnicodes (num: number = 0, startCodePoint: number  = 57344): Array<string> {
+export default function createUnicodes (num: number = 0, startCodePoint: number  = 57344, type?: string): Array<string> {
     if(
         !(
           (startCodePoint - unicodeToCodePoint('E000') >= 0 &&  unicodeToCodePoint('F8FF') - startCodePoint - num >= 0) ||
@@ -27,7 +28,12 @@ export default function createUnicodes (num: number = 0, startCodePoint: number 
         num--;
         unicodes.push()
         const codePoint = startCodePoint + num
-        unicodes[num] = `&#x${codePoint.toString(16)};`
+        if(type === '#x'){
+          unicodes[num] = `&#x${codePoint.toString(16)};`
+        }else{
+          unicodes[num] = codePoint.toString(16)
+        }
+
     }
     return unicodes
 }
