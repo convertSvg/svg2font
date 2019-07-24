@@ -620,10 +620,10 @@ export function htmlTemplate(fontTypes, fontName, glyphs = []) {
         <div class="content unicode" style="display: block;">
             <ul class="icon_lists dib-box">
               ${
-                glyphs.map(({glyphName, unicode}) => `
+                glyphs.map(({originName, unicode}) => `
                 <li class="dib">
                 <span class="icon font_family">&#x${unicode};</span>
-                  <div class="name">${glyphName}</div>
+                  <div class="name">${originName}</div>
                   <div class="code-name">&amp;#x${unicode};</div>
                 </li>
                 `).join('')
@@ -678,11 +678,11 @@ export function htmlTemplate(fontTypes, fontName, glyphs = []) {
         <div class="content font-class">
           <ul class="icon_lists dib-box">
           ${
-            glyphs.map(({glyphName, unicode}) => `
+            glyphs.map(({glyphName, originName, unicode}) => `
             <li class="dib">
               <span class="icon font_family ${glyphName}"></span>
               <div class="name">
-                lock
+                ${originName}
               </div>
               <div class="code-name">.${glyphName}
               </div>
@@ -718,12 +718,12 @@ export function htmlTemplate(fontTypes, fontName, glyphs = []) {
         <div class="content symbol">
             <ul class="icon_lists dib-box">
               ${
-                glyphs.map(({glyphName, unicode}) => `
+                glyphs.map(({glyphName,originName, unicode}) => `
                 <li class="dib">
                   <svg class="icon svg-icon" aria-hidden="true">
                     <use xlink:href="#${glyphName}"></use>
                   </svg>
-                  <div class="name">lock</div>
+                  <div class="name">${originName}</div>
                   <div class="code-name">#${glyphName}</div>
                 </li>
                 `).join('')

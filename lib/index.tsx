@@ -24,6 +24,7 @@ async function svg2Font({
   fontName = 'svg2font',
   fontFamily = 'svg2font',
   startCodePoint = 57344,
+  customUnicodeList,
   ascent = 896,
   descent = -128,
   css = true,
@@ -38,7 +39,9 @@ async function svg2Font({
   for(let i = 0, len = files.length; i< len; i++){
     const data:any = await readStreamToFile(files[i])
     const glyphName = path.basename(files[i]).split('.')[0]
-    glyphSvgs[glyphName] = data
+    glyphSvgs[glyphName] = {
+      path: data
+    }
   }
 
   const font = new Font({
@@ -48,6 +51,7 @@ async function svg2Font({
     ascent,
     descent,
     startCodePoint,
+    customUnicodeList,
   })
 
   return font.convertFonts({dist, fontTypes, css, symbol})

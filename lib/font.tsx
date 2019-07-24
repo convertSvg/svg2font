@@ -56,13 +56,14 @@ export default class Font {
     ascent = 896,
     descent = -128,
     startCodePoint = 57344,
+    customUnicodeList
   }) {
     this.fontName = fontName
     this.fontFamily = fontFamily
     this.ascent = ascent
     this.descent = descent
 
-    this.glyphs = this.createGlyphs(glyphSvgs, startCodePoint)
+    this.glyphs = this.createGlyphs(glyphSvgs, startCodePoint, customUnicodeList)
     const CONFIG = _.merge(DEFAULT_CONFIG, {
       font: {
         id: fontName
@@ -77,12 +78,18 @@ export default class Font {
     this.svgFont = fontTemplate(DEFAULT_CONFIG)
   }
 
-  createGlyphs (glyphSvgs, startCodePoint) {
+  createGlyphs (glyphSvgs, startCodePoint, customUnicodeList) {
     const { ascent } = this
     const glyphs = []
 
     if(Array.isArray(glyphSvgs)){
-      const unicodes = createUnicodes(glyphSvgs.length, startCodePoint)
+      let unicodes
+      if(customUnicodeList && Array.isArray(customUnicodeList) && customUnicodeList.length >= glyphSvgs.length){
+        unicodes = customUnicodeList
+      } else {
+        unicodes = createUnicodes(glyphSvgs.length, startCodePoint)
+      }
+
       glyphSvgs.map((data, idx) => {
         const d = this.getGlyphData(data, ascent)
         glyphs.push({ unicode: unicodes[idx], d: d[0], originD: d[1], horizAdvX: 1024, vertAdvY: 1024, glyphName: `${this.fontName}_${idx}`})
@@ -93,18 +100,29 @@ export default class Font {
 
     if(Object.prototype.toString.call(glyphSvgs) === '[object Object]'){
       const glyphArr = Object.keys(glyphSvgs)
-      const unicodes = createUnicodes(glyphArr.length, startCodePoint)
+      let unicodes
+      if(customUnicodeList && Array.isArray(customUnicodeList) && customUnicodeList.length >= glyphArr.length){
+        unicodes = customUnicodeList
+      } else {
+        unicodes = createUnicodes(glyphArr.length, startCodePoint)
+      }
+
       glyphArr.map((glyphName, idx) => {
-        const d = this.getGlyphData(glyphSvgs[glyphName], ascent)
-        glyphs.push({ unicode: unicodes[idx], d: d[0], originD: d[1], horizAdvX: 1024, vertAdvY: 1024, glyphName})
+        const d = this.getGlyphData(glyphSvgs[glyphName].path, ascent)
+        glyphs.push({ unicode: unicodes[idx], d: d[0], originD: d[1], horizAdvX: 1024, vertAdvY: 1024, glyphName, originName: glyphSvgs[glyphName].originName || glyphName})
       })
 
       return glyphs
     }
 
     if(typeof glyphSvgs === 'string'){
+      let unicodes
+      if(customUnicodeList && Array.isArray(customUnicodeList) && customUnicodeList.length >= glyphSvgs.length){
+        unicodes = customUnicodeList
+      } else {
+        unicodes = createUnicodes(1, startCodePoint)
+      }
 
-      const unicodes = createUnicodes(1, startCodePoint)
       const d = this.getGlyphData(glyphSvgs, ascent)
       glyphs.push({ unicode: unicodes[0], d: d[0], originD: d[1], horizAdvX: 1024, vertAdvY: 1024, glyphName: `${this.fontName}_0`})
       return glyphs
