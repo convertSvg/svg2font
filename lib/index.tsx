@@ -22,10 +22,12 @@ async function svg2Font({
   src = '',
   dist = '',
   fontName = 'svg2font',
+  fontFamily = 'svg2font',
   startCodePoint = 57344,
   ascent = 896,
   descent = -128,
   css = true,
+  symbol = true,
   fontTypes = ['eot', 'woff2', 'woff', 'ttf', 'svg'],
 }) {
 
@@ -41,13 +43,14 @@ async function svg2Font({
 
   const font = new Font({
     fontName,
+    fontFamily,
     glyphSvgs,
     ascent,
     descent,
     startCodePoint,
   })
 
-  return font.convertFonts({dist, fontTypes, css})
+  return font.convertFonts({dist, fontTypes, css, symbol})
 }
 export { svg2Font, Font }
 
