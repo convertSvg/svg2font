@@ -92,7 +92,7 @@ export default class Font {
 
       glyphSvgs.map((data, idx) => {
         const d = this.getGlyphData(data, ascent)
-        glyphs.push({ unicode: unicodes[idx], d: d[0], originD: d[1], horizAdvX: 1024, vertAdvY: 1024, glyphName: `${this.fontName}_${idx}`})
+        glyphs.push({ unicode: unicodes[idx], d: d[0], originDs: d[1], horizAdvX: 1024, vertAdvY: 1024, glyphName: `${this.fontName}_${idx}`})
       })
 
       return glyphs
@@ -109,7 +109,7 @@ export default class Font {
 
       glyphArr.map((glyphName, idx) => {
         const d = this.getGlyphData(glyphSvgs[glyphName].path, ascent)
-        glyphs.push({ unicode: unicodes[idx], d: d[0], originD: d[1], horizAdvX: 1024, vertAdvY: 1024, glyphName, originName: glyphSvgs[glyphName].originName || glyphName})
+        glyphs.push({ unicode: unicodes[idx], d: d[0], originDs: d[1], horizAdvX: 1024, vertAdvY: 1024, glyphName, originName: glyphSvgs[glyphName].originName || glyphName})
       })
 
       return glyphs
@@ -124,20 +124,28 @@ export default class Font {
       }
 
       const d = this.getGlyphData(glyphSvgs, ascent)
-      glyphs.push({ unicode: unicodes[0], d: d[0], originD: d[1], horizAdvX: 1024, vertAdvY: 1024, glyphName: `${this.fontName}_0`})
+      glyphs.push({ unicode: unicodes[0], d: d[0], originDs: d[1], horizAdvX: 1024, vertAdvY: 1024, glyphName: `${this.fontName}_0`})
       return glyphs
     }
   }
 
   getGlyphData (data, ascent) {
-    let d1 = ''
-    let d2 = ''
+    let d1 = '' // font fontcss
+    let d2 = [] // symbol originD list
     const Node = new DOMParser().parseFromString(data, 'application/xml')
     Array.from(Node.documentElement.childNodes).map( (node:any) => {
       if (node.nodeName.toUpperCase() === 'PATH' && node.hasAttribute && node.hasAttribute('d')) {
-          d2 = svgpath(node.getAttribute('d')).rel().round(2).toString()
+          d2.push({
+            d: svgpath(node.getAttribute('d')).rel().round(2).toString(),
+            fill: node.getAttribute('fill') || ''
+          })
           // SVG字体与标准图形坐标系不一致 https://www.w3.org/TR/SVG/text.html#DominantBaselineProperty
-          d1 = svgpath(node.getAttribute('d')).rel().round(2).scale(1, -1).translate(0, ascent).toString()
+          const signalD = svgpath(node.getAttribute('d')).rel().round(2).scale(1, -1).translate(0, ascent).toString()
+          if(!/z$/.test(signalD)){
+            d1 += signalD+'z'
+          } else {
+            d1 += signalD
+          }
       }
     })
     return [d1, d2]

@@ -61,7 +61,7 @@ export function fontCSSTemplate(fontTypes, fontName, fontFamily, glyphs = []) {
 export function svgSymbolTemplate(fontTypes, fontName, glyphs = []) {
   const SYMBOLTMPL = `
   (function (document) {
-    var symbols = '<svg xmlns="http://www.w3.org/2000/svg" style="display:none">${ glyphs.map(({glyphName, originD}) => `<symbol id="${glyphName}" viewBox="0 0 1024 1024"><path d="${originD}" fill=""></path></symbol>`).join('')}</svg>'
+var symbols = '<svg xmlns="http://www.w3.org/2000/svg" style="display:none">${ glyphs.map(({glyphName, originDs}) => `<symbol id="${glyphName}" viewBox="0 0 1024 1024">${ originDs.map(({d, fill}) => `<path d="${d}" fill="${fill}"></path>`).join('') }</symbol>`).join('')}</svg>'
     document.body.insertAdjacentHTML('afterBegin', symbols)
   })(document);`
   return SYMBOLTMPL
