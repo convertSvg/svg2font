@@ -36,11 +36,14 @@ const fs = require('fs')
 svg2Font({
   src: './test/svgicon/*.svg', // svg path  support patterns
   dist: './test/',
+  fontFamily: 'svg2font',  // fontFamily name
   fontName: 'svg2font',  // font name
   startCodePoint: 57344, // unicode start code point
   ascent: 924,
   descent: -100,
   css: true,
+  symbol: true,
+  html: true,
 }).then(() => {
   console.log('svg2Font done !')
 })
@@ -48,11 +51,15 @@ svg2Font({
 const icon = fs.readFileSync(path.join( './test/svgicon', `icon_7days.svg`), 'utf8')
 
 const font = new Font({
+  fontFamily: 'svg2font',  // fontFamily name
   fontName: 'svgfont',
   glyphSvgs: icon,  //  support string array object
   ascent: 896,
   descent: -128,
   startCodePoint: 57344,
+  css: true,
+  symbol: true,
+  html: true,
 })
 
 font.convertFonts({
@@ -68,18 +75,26 @@ font.convertFonts({
 - `options`
   - `src`- SVG file 
   - `dist` - out file
-  - `fontName` - font family name
+  - `fontFamily` - font family name
+  - `fontName` - font name
   - `startCodePoint` - Unicode Private Use Areas start Code Point
   - `ascent`
   - `descent`
+  - `css`
+  - `symbol`
+  - `html`
 
 ### new Font(options)
 - `options`
-  - `fontName` - font family name
+  - `fontFamily` - font family name
+  - `fontName` - font name
   - `glyphSvgs` - svg datas support string array object
   - `startCodePoint` - Unicode Private Use Areas start Code Point
   - `ascent`
   - `descent`
+  - `css`
+  - `symbol`
+  - `html`
 
 - `method`
   - `getGlyph`

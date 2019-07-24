@@ -1021,7 +1021,7 @@ class Font {
         const ttfBuffer = this.getTTF();
         return ttf2woff2(ttfBuffer);
     }
-    convertFonts({ dist = './', fontTypes = ['eot', 'woff2', 'woff', 'ttf', 'svg'], css = true, symbol = true }) {
+    convertFonts({ dist = './', fontTypes = ['eot', 'woff2', 'woff', 'ttf', 'svg'], css = true, symbol = true, html }) {
         const fontName = this.fontName;
         const fontFamily = this.fontFamily;
         const glyphs = this.glyphs;
@@ -1052,7 +1052,7 @@ class Font {
             const SYMBOLTMPL = svgSymbolTemplate(fontTypes, fontName, glyphs);
             fs$1.writeFileSync(path.join(dist, `${fontName}.js`), SYMBOLTMPL);
         }
-        if (symbol && fontTypes.length > 0) {
+        if (html && fontTypes.length > 0) {
             const HTMLTMPL = htmlTemplate(fontTypes, fontName, glyphs);
             fs$1.writeFileSync(path.join(dist, `${fontName}.html`), HTMLTMPL);
         }
@@ -1073,7 +1073,7 @@ const getFileList = (pattern, options = {}) => {
     });
     return promise;
 };
-function svg2Font({ src = '', dist = '', fontName = 'svg2font', fontFamily = 'svg2font', startCodePoint = 57344, customUnicodeList, ascent = 896, descent = -128, css = true, symbol = true, fontTypes = ['eot', 'woff2', 'woff', 'ttf', 'svg'], }) {
+function svg2Font({ src = '', dist = '', fontName = 'svg2font', fontFamily = 'svg2font', startCodePoint = 57344, customUnicodeList, ascent = 896, descent = -128, css = true, symbol = true, html = false, fontTypes = ['eot', 'woff2', 'woff', 'ttf', 'svg'], }) {
     return __awaiter(this, void 0, void 0, function* () {
         // const files = Glob.sync(src, {}) || []
         const files = yield getFileList(src);
@@ -1094,7 +1094,7 @@ function svg2Font({ src = '', dist = '', fontName = 'svg2font', fontFamily = 'sv
             startCodePoint,
             customUnicodeList,
         });
-        return font.convertFonts({ dist, fontTypes, css, symbol });
+        return font.convertFonts({ dist, fontTypes, css, symbol, html });
     });
 }
 

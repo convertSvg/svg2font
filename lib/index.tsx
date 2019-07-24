@@ -29,6 +29,7 @@ async function svg2Font({
   descent = -128,
   css = true,
   symbol = true,
+  html = true,
   fontTypes = ['eot', 'woff2', 'woff', 'ttf', 'svg'],
 }) {
 
@@ -54,7 +55,7 @@ async function svg2Font({
     customUnicodeList,
   })
 
-  return font.convertFonts({dist, fontTypes, css, symbol})
+  return font.convertFonts({dist, fontTypes, css, symbol, html})
 }
 export { svg2Font, Font }
 

@@ -177,7 +177,7 @@ export default class Font {
     return ttf2woff2(ttfBuffer)
   }
 
-  convertFonts ({dist = './', fontTypes = ['eot', 'woff2', 'woff', 'ttf', 'svg'], css = true, symbol = true}) {
+  convertFonts ({dist = './', fontTypes = ['eot', 'woff2', 'woff', 'ttf', 'svg'], css = true, symbol = true, html}) {
     const fontName = this.fontName
     const fontFamily = this.fontFamily
     const glyphs = this.glyphs
@@ -211,7 +211,7 @@ export default class Font {
       fs.writeFileSync(path.join(dist, `${fontName}.js`), SYMBOLTMPL)
     }
 
-    if(symbol && fontTypes.length > 0){
+    if(html && fontTypes.length > 0){
       const HTMLTMPL = htmlTemplate(fontTypes, fontName, glyphs)
       fs.writeFileSync(path.join(dist, `${fontName}.html`), HTMLTMPL)
     }
