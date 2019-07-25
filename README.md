@@ -78,8 +78,10 @@ font.convertFonts({
   - `fontFamily` - font family name
   - `fontName` - font name
   - `startCodePoint` - Unicode Private Use Areas start Code Point
+  - `customUnicodeList`
   - `ascent`
   - `descent`
+  - `fontCdnUrl`      
   - `css`
   - `symbol`
   - `html`
@@ -90,18 +92,25 @@ font.convertFonts({
   - `fontName` - font name
   - `glyphSvgs` - svg datas support string array object
   - `startCodePoint` - Unicode Private Use Areas start Code Point
+  - `customUnicodeList`
   - `ascent`
   - `descent`
-  - `css`
-  - `symbol`
-  - `html`
+
 
 - `method`
   - `getGlyph`
   - `getTTF`
   - `getWOFF`
   - `getWOFF2`
-  - `convertFonts`
+  - `convertFonts(options)`
+    - `options`
+      - `dist`
+      - `fontTypes`
+      - `fontCdnUrl`     
+      - `css`
+      - `symbol`
+      - `html`  
+
 
 ## Features
 
