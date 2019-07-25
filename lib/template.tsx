@@ -22,22 +22,22 @@ export function fontTemplate(DEFAULT_CONFIG) {
 }
 
 
-export function fontCSSTemplate(fontTypes, fontName, fontFamily, glyphs = []) {
+export function fontCSSTemplate(fontTypes, fontName, fontFamily, glyphs = [], fontCdnUrl = '') {
   const CSSTMPL = `
   @font-face {
     font-family: '${fontFamily}';
     ${fontTypes.includes('eot') && `src: url('${fontName}.eot'); /* IE9 */`}
     src: ${fontTypes.map(item => {
       if(item == 'eot'){
-        return `url('${fontName}.eot?#iefix') format('embedded-opentype') /* IE6-IE8 */`
+        return `url('${fontCdnUrl}${fontName}.eot?#iefix') format('embedded-opentype') /* IE6-IE8 */`
       }else if(item == 'woff2'){
-        return `url('${fontName}.woff2') format('woff2') /* chrome、firefox */`
+        return `url('${fontCdnUrl}${fontName}.woff2') format('woff2') /* chrome、firefox */`
       }else if(item == 'woff'){
-        return `url('${fontName}.woff') format('woff') /* chrome、firefox */`
+        return `url('${fontCdnUrl}${fontName}.woff') format('woff') /* chrome、firefox */`
       }else if(item == 'ttf'){
-        return `url('${fontName}.ttf') format('truetype') /* chrome、firefox、opera、Safari, Android, iOS 4.2+ */`
+        return `url('${fontCdnUrl}${fontName}.ttf') format('truetype') /* chrome、firefox、opera、Safari, Android, iOS 4.2+ */`
       }else if(item == 'svg'){
-        return `url('${fontName}.svg#${fontFamily}') format('svg') /* iOS 4.1- */`
+        return `url('${fontCdnUrl}${fontName}.svg#${fontFamily}') format('svg') /* iOS 4.1- */`
       }
     }).join(',\n\t\t')};
   }

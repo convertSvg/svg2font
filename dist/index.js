@@ -115,26 +115,26 @@ function fontTemplate(DEFAULT_CONFIG) {
     </svg>`;
     return TMPL;
 }
-function fontCSSTemplate(fontTypes, fontName, fontFamily, glyphs = []) {
+function fontCSSTemplate(fontTypes, fontName, fontFamily, glyphs = [], fontCdnUrl = '') {
     const CSSTMPL = `
   @font-face {
     font-family: '${fontFamily}';
     ${fontTypes.includes('eot') && `src: url('${fontName}.eot'); /* IE9 */`}
     src: ${fontTypes.map(item => {
         if (item == 'eot') {
-            return `url('${fontName}.eot?#iefix') format('embedded-opentype') /* IE6-IE8 */`;
+            return `url('${fontCdnUrl}${fontName}.eot?#iefix') format('embedded-opentype') /* IE6-IE8 */`;
         }
         else if (item == 'woff2') {
-            return `url('${fontName}.woff2') format('woff2') /* chrome、firefox */`;
+            return `url('${fontCdnUrl}${fontName}.woff2') format('woff2') /* chrome、firefox */`;
         }
         else if (item == 'woff') {
-            return `url('${fontName}.woff') format('woff') /* chrome、firefox */`;
+            return `url('${fontCdnUrl}${fontName}.woff') format('woff') /* chrome、firefox */`;
         }
         else if (item == 'ttf') {
-            return `url('${fontName}.ttf') format('truetype') /* chrome、firefox、opera、Safari, Android, iOS 4.2+ */`;
+            return `url('${fontCdnUrl}${fontName}.ttf') format('truetype') /* chrome、firefox、opera、Safari, Android, iOS 4.2+ */`;
         }
         else if (item == 'svg') {
-            return `url('${fontName}.svg#${fontName}') format('svg') /* iOS 4.1- */`;
+            return `url('${fontCdnUrl}${fontName}.svg#${fontFamily}') format('svg') /* iOS 4.1- */`;
         }
     }).join(',\n\t\t')};
   }
@@ -1021,7 +1021,7 @@ class Font {
         const ttfBuffer = this.getTTF();
         return ttf2woff2(ttfBuffer);
     }
-    convertFonts({ dist = './', fontTypes = ['eot', 'woff2', 'woff', 'ttf', 'svg'], css = true, symbol = true, html }) {
+    convertFonts({ dist = './', fontTypes = ['eot', 'woff2', 'woff', 'ttf', 'svg'], css = true, symbol = true, html, fontCdnUrl }) {
         const fontName = this.fontName;
         const fontFamily = this.fontFamily;
         const glyphs = this.glyphs;
@@ -1045,7 +1045,7 @@ class Font {
             }
         });
         if (css && fontTypes.length > 0) {
-            const CSSTMPL = fontCSSTemplate(fontTypes, fontName, fontFamily, glyphs);
+            const CSSTMPL = fontCSSTemplate(fontTypes, fontName, fontFamily, glyphs, fontCdnUrl);
             fs$1.writeFileSync(path.join(dist, `${fontName}.css`), CSSTMPL);
         }
         if (symbol && fontTypes.length > 0) {
@@ -1073,7 +1073,7 @@ const getFileList = (pattern, options = {}) => {
     });
     return promise;
 };
-function svg2Font({ src = '', dist = '', fontName = 'svg2font', fontFamily = 'svg2font', startCodePoint = 57344, customUnicodeList, ascent = 896, descent = -128, css = true, symbol = true, html = false, fontTypes = ['eot', 'woff2', 'woff', 'ttf', 'svg'], }) {
+function svg2Font({ src = '', dist = '', fontName = 'svg2font', fontFamily = 'svg2font', fontCdnUrl = '', startCodePoint = 57344, customUnicodeList, ascent = 896, descent = -128, css = true, symbol = true, html = true, fontTypes = ['eot', 'woff2', 'woff', 'ttf', 'svg'], }) {
     return __awaiter(this, void 0, void 0, function* () {
         // const files = Glob.sync(src, {}) || []
         const files = yield getFileList(src);
@@ -1094,7 +1094,7 @@ function svg2Font({ src = '', dist = '', fontName = 'svg2font', fontFamily = 'sv
             startCodePoint,
             customUnicodeList,
         });
-        return font.convertFonts({ dist, fontTypes, css, symbol, html });
+        return font.convertFonts({ dist, fontTypes, css, symbol, html, fontCdnUrl });
     });
 }
 

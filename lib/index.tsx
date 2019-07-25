@@ -23,6 +23,7 @@ async function svg2Font({
   dist = '',
   fontName = 'svg2font',
   fontFamily = 'svg2font',
+  fontCdnUrl = '',
   startCodePoint = 57344,
   customUnicodeList,
   ascent = 896,
@@ -55,7 +56,7 @@ async function svg2Font({
     customUnicodeList,
   })
 
-  return font.convertFonts({dist, fontTypes, css, symbol, html})
+  return font.convertFonts({dist, fontTypes, css, symbol, html, fontCdnUrl})
 }
 export { svg2Font, Font }
 
