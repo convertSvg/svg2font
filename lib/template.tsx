@@ -37,7 +37,7 @@ export function fontCSSTemplate(fontTypes, fontName, fontFamily, glyphs = []) {
       }else if(item == 'ttf'){
         return `url('${fontName}.ttf') format('truetype') /* chrome、firefox、opera、Safari, Android, iOS 4.2+ */`
       }else if(item == 'svg'){
-        return `url('${fontName}.svg#${fontName}') format('svg') /* iOS 4.1- */`
+        return `url('${fontName}.svg#${fontFamily}') format('svg') /* iOS 4.1- */`
       }
     }).join(',\n\t\t')};
   }
