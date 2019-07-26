@@ -613,7 +613,7 @@ export function htmlTemplate(fontTypes, fontName, glyphs = []) {
           <li class="dib"><span>Symbol</span></li>
         </ul>
 
-        <a href="http://quark.jd.com/icon/manage/index?manage_type=myprojects&projectId=1138969" target="_blank" class="nav-more">查看项目</a>
+        <a href="http://quark.jd.com/icon/" target="_blank" class="nav-more">去QuarkIcon官网</a>
 
       </div>
       <div class="tab-container">
