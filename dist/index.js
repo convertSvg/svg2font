@@ -706,7 +706,7 @@ function htmlTemplate(fontTypes, fontName, glyphs = []) {
           <li class="dib"><span>Symbol</span></li>
         </ul>
 
-        <a href="http://quark.jd.com/icon/manage/index?manage_type=myprojects&projectId=1138969" target="_blank" class="nav-more">查看项目</a>
+        <a href="http://quark.jd.com/icon/" target="_blank" class="nav-more">去QuarkIcon官网</a>
 
       </div>
       <div class="tab-container">
@@ -1021,7 +1021,7 @@ class Font {
         const ttfBuffer = this.getTTF();
         return ttf2woff2(ttfBuffer);
     }
-    convertFonts({ dist = './', fontTypes = ['eot', 'woff2', 'woff', 'ttf', 'svg'], css = true, symbol = true, html, fontCdnUrl }) {
+    convertFonts({ dist = './', fontTypes = ['eot', 'woff2', 'woff', 'ttf', 'svg'], css = true, symbol = true, html = true, fontCdnUrl = '' }) {
         const fontName = this.fontName;
         const fontFamily = this.fontFamily;
         const glyphs = this.glyphs;
