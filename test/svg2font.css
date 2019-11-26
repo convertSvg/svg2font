@@ -1,16 +1,16 @@
 
   @font-face {
-    font-family: 'svg2font';
-    src: url('svg2font.eot'); /* IE9 */
-    src: url('svg2font.eot?#iefix') format('embedded-opentype') /* IE6-IE8 */,
-		url('svg2font.woff2') format('woff2') /* chrome、firefox */,
-		url('svg2font.woff') format('woff') /* chrome、firefox */,
-		url('svg2font.ttf') format('truetype') /* chrome、firefox、opera、Safari, Android, iOS 4.2+ */,
-		url('svg2font.svg#svg2font') format('svg') /* iOS 4.1- */;
+    font-family: 'iconfont';
+    src: url('//storage.360buyimg.com/lcstatic/plugins/svg2font.eot'); /* IE9 */
+    src: url('//storage.360buyimg.com/lcstatic/plugins/svg2font.eot?#iefix') format('embedded-opentype') /* IE6-IE8 */,
+		url('//storage.360buyimg.com/lcstatic/plugins/svg2font.woff2') format('woff2') /* chrome、firefox */,
+		url('//storage.360buyimg.com/lcstatic/plugins/svg2font.woff') format('woff') /* chrome、firefox */,
+		url('//storage.360buyimg.com/lcstatic/plugins/svg2font.ttf') format('truetype') /* chrome、firefox、opera、Safari, Android, iOS 4.2+ */,
+		url('//storage.360buyimg.com/lcstatic/plugins/svg2font.svg#iconfont') format('svg') /* iOS 4.1- */;
   }
 
   .font_family{
-    font-family: 'svg2font';
+    font-family: 'iconfont';
     font-size: 16px;
     font-style: normal;
     -webkit-font-smoothing: antialiased;
@@ -18,17 +18,9 @@
   }
   
   .icon_7days:before {
-    content: "\e000";
+    content: "\e975";
   }
 
   .icon_hour:before {
-    content: "\e001";
-  }
-
-  .icon_postage:before {
-    content: "\e002";
-  }
-
-  .icon_stop7days:before {
-    content: "\e003";
+    content: "\e973";
   }

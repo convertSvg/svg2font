@@ -119,7 +119,7 @@ function fontCSSTemplate(fontTypes, fontName, fontFamily, glyphs = [], fontCdnUr
     const CSSTMPL = `
   @font-face {
     font-family: '${fontFamily}';
-    ${fontTypes.includes('eot') && `src: url('${fontName}.eot'); /* IE9 */`}
+    ${fontTypes.includes('eot') && `src: url('${fontCdnUrl}${fontName}.eot'); /* IE9 */`}
     src: ${fontTypes.map(item => {
         if (item == 'eot') {
             return `url('${fontCdnUrl}${fontName}.eot?#iefix') format('embedded-opentype') /* IE6-IE8 */`;
