@@ -23,6 +23,7 @@ async function svg2Font({
   dist = '',
   fontName = 'svg2font',
   fontFamily = 'svg2font',
+  fontFamilyClass = 'font_family',
   fontCdnUrl = '',
   startCodePoint = 57344,
   customUnicodeList,
@@ -49,6 +50,7 @@ async function svg2Font({
   const font = new Font({
     fontName,
     fontFamily,
+    fontFamilyClass,
     glyphSvgs,
     ascent,
     descent,

@@ -22,7 +22,7 @@ export function fontTemplate(DEFAULT_CONFIG) {
 }
 
 
-export function fontCSSTemplate(fontTypes, fontName, fontFamily, glyphs = [], fontCdnUrl = '') {
+export function fontCSSTemplate(fontTypes, fontName, fontFamily, fontFamilyClass, glyphs = [], fontCdnUrl = '') {
   const CSSTMPL = `
   @font-face {
     font-family: '${fontFamily}';
@@ -42,7 +42,7 @@ export function fontCSSTemplate(fontTypes, fontName, fontFamily, glyphs = [], fo
     }).join(',\n\t\t')};
   }
 
-  .font_family{
+  .${fontFamilyClass}{
     font-family: '${fontFamily}';
     font-size: 16px;
     font-style: normal;
@@ -67,7 +67,7 @@ var symbols = '<svg xmlns="http://www.w3.org/2000/svg" style="display:none">${ g
   return SYMBOLTMPL
 }
 
-export function htmlTemplate(fontTypes, fontName, glyphs = []) {
+export function htmlTemplate(fontTypes, fontName, fontFamilyClass, glyphs = []) {
   const HTMLTMPL = `<!DOCTYPE html>
   <html>
   <head>
@@ -622,7 +622,7 @@ export function htmlTemplate(fontTypes, fontName, glyphs = []) {
               ${
                 glyphs.map(({originName, unicode}) => `
                 <li class="dib">
-                <span class="icon font_family">&#x${unicode};</span>
+                <span class="icon ${fontFamilyClass}">&#x${unicode};</span>
                   <div class="name">${originName}</div>
                   <div class="code-name">&amp;#x${unicode};</div>
                 </li>
@@ -680,7 +680,7 @@ export function htmlTemplate(fontTypes, fontName, glyphs = []) {
           ${
             glyphs.map(({glyphName, originName, unicode}) => `
             <li class="dib">
-              <span class="icon font_family ${glyphName}"></span>
+              <span class="icon ${fontFamilyClass} ${glyphName}"></span>
               <div class="name">
                 ${originName}
               </div>

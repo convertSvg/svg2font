@@ -115,7 +115,7 @@ function fontTemplate(DEFAULT_CONFIG) {
     </svg>`;
     return TMPL;
 }
-function fontCSSTemplate(fontTypes, fontName, fontFamily, glyphs = [], fontCdnUrl = '') {
+function fontCSSTemplate(fontTypes, fontName, fontFamily, fontFamilyClass, glyphs = [], fontCdnUrl = '') {
     const CSSTMPL = `
   @font-face {
     font-family: '${fontFamily}';
@@ -139,7 +139,7 @@ function fontCSSTemplate(fontTypes, fontName, fontFamily, glyphs = [], fontCdnUr
     }).join(',\n\t\t')};
   }
 
-  .font_family{
+  .${fontFamilyClass}{
     font-family: '${fontFamily}';
     font-size: 16px;
     font-style: normal;
@@ -160,7 +160,7 @@ var symbols = '<svg xmlns="http://www.w3.org/2000/svg" style="display:none">${gl
   })(document);`;
     return SYMBOLTMPL;
 }
-function htmlTemplate(fontTypes, fontName, glyphs = []) {
+function htmlTemplate(fontTypes, fontName, fontFamilyClass, glyphs = []) {
     const HTMLTMPL = `<!DOCTYPE html>
   <html>
   <head>
@@ -714,7 +714,7 @@ function htmlTemplate(fontTypes, fontName, glyphs = []) {
             <ul class="icon_lists dib-box">
               ${glyphs.map(({ originName, unicode }) => `
                 <li class="dib">
-                <span class="icon font_family">&#x${unicode};</span>
+                <span class="icon ${fontFamilyClass}">&#x${unicode};</span>
                   <div class="name">${originName}</div>
                   <div class="code-name">&amp;#x${unicode};</div>
                 </li>
@@ -770,7 +770,7 @@ function htmlTemplate(fontTypes, fontName, glyphs = []) {
           <ul class="icon_lists dib-box">
           ${glyphs.map(({ glyphName, originName, unicode }) => `
             <li class="dib">
-              <span class="icon font_family ${glyphName}"></span>
+              <span class="icon ${fontFamilyClass} ${glyphName}"></span>
               <div class="name">
                 ${originName}
               </div>
@@ -914,9 +914,10 @@ const DEFAULT_CONFIG = {
  * @support svg, ttf, eot, woff, woff2
  */
 class Font {
-    constructor({ fontName = 'svg2font', fontFamily = 'svg2font', glyphSvgs, ascent = 896, descent = -128, startCodePoint = 57344, customUnicodeList }) {
+    constructor({ fontName = 'svg2font', fontFamily = 'svg2font', fontFamilyClass = 'font_family', glyphSvgs, ascent = 896, descent = -128, startCodePoint = 57344, customUnicodeList }) {
         this.fontName = fontName;
         this.fontFamily = fontFamily;
+        this.fontFamilyClass = fontFamilyClass;
         this.ascent = ascent;
         this.descent = descent;
         this.glyphs = this.createGlyphs(glyphSvgs, startCodePoint, customUnicodeList);
@@ -1024,6 +1025,7 @@ class Font {
     convertFonts({ dist = './', fontTypes = ['eot', 'woff2', 'woff', 'ttf', 'svg'], css = true, symbol = true, html = true, fontCdnUrl = '' }) {
         const fontName = this.fontName;
         const fontFamily = this.fontFamily;
+        const fontFamilyClass = this.fontFamilyClass;
         const glyphs = this.glyphs;
         fontTypes.map(format => {
             switch (format) {
@@ -1045,7 +1047,7 @@ class Font {
             }
         });
         if (css && fontTypes.length > 0) {
-            const CSSTMPL = fontCSSTemplate(fontTypes, fontName, fontFamily, glyphs, fontCdnUrl);
+            const CSSTMPL = fontCSSTemplate(fontTypes, fontName, fontFamily, fontFamilyClass, glyphs, fontCdnUrl);
             fs$1.writeFileSync(path.join(dist, `${fontName}.css`), CSSTMPL);
         }
         if (symbol && fontTypes.length > 0) {
@@ -1053,7 +1055,7 @@ class Font {
             fs$1.writeFileSync(path.join(dist, `${fontName}.js`), SYMBOLTMPL);
         }
         if (html && fontTypes.length > 0) {
-            const HTMLTMPL = htmlTemplate(fontTypes, fontName, glyphs);
+            const HTMLTMPL = htmlTemplate(fontTypes, fontName, fontFamilyClass, glyphs);
             fs$1.writeFileSync(path.join(dist, `${fontName}.html`), HTMLTMPL);
         }
     }
@@ -1073,7 +1075,7 @@ const getFileList = (pattern, options = {}) => {
     });
     return promise;
 };
-function svg2Font({ src = '', dist = '', fontName = 'svg2font', fontFamily = 'svg2font', fontCdnUrl = '', startCodePoint = 57344, customUnicodeList, ascent = 896, descent = -128, css = true, symbol = true, html = true, fontTypes = ['eot', 'woff2', 'woff', 'ttf', 'svg'], }) {
+function svg2Font({ src = '', dist = '', fontName = 'svg2font', fontFamily = 'svg2font', fontFamilyClass = 'font_family', fontCdnUrl = '', startCodePoint = 57344, customUnicodeList, ascent = 896, descent = -128, css = true, symbol = true, html = true, fontTypes = ['eot', 'woff2', 'woff', 'ttf', 'svg'], }) {
     return __awaiter(this, void 0, void 0, function* () {
         // const files = Glob.sync(src, {}) || []
         const files = yield getFileList(src);
@@ -1088,6 +1090,7 @@ function svg2Font({ src = '', dist = '', fontName = 'svg2font', fontFamily = 'sv
         const font = new Font({
             fontName,
             fontFamily,
+            fontFamilyClass,
             glyphSvgs,
             ascent,
             descent,

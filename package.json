@@ -4,13 +4,15 @@
   "description": "Converts SVG to font format.",
   "main": "./dist/index.js",
   "scripts": {
-    "start": "npx rollup -c && node index.js"
+    "start": "npx rollup -c && node index.js",
+    "deploy:prod": "standard-version --release-as patch && git push --follow-tags origin HEAD"
   },
   "husky": {
     "hooks": {
       "commit-msg": "commitlint -e $GIT_PARAMS"
     }
   },
+  "types": "./index.d.ts",
   "author": "pfan",
   "license": "ISC",
   "dependencies": {
@@ -33,6 +35,7 @@
     "rollup-plugin-commonjs": "^9.3.4",
     "rollup-plugin-node-resolve": "^4.2.4",
     "rollup-plugin-typescript": "^1.0.1",
+    "standard-version": "^7.0.1",
     "tslib": "^1.9.3",
     "tslint": "^5.16.0",
     "typescript": "^3.4.5"

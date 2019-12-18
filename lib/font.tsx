@@ -46,12 +46,14 @@ export default class Font {
   public glyphs;
   public fontName;
   public fontFamily;
+  public fontFamilyClass;
   public svgFont;
   public ascent;
   public descent;
   constructor ({
     fontName = 'svg2font',
     fontFamily = 'svg2font',
+    fontFamilyClass = 'font_family',
     glyphSvgs,
     ascent = 896,
     descent = -128,
@@ -60,6 +62,7 @@ export default class Font {
   }) {
     this.fontName = fontName
     this.fontFamily = fontFamily
+    this.fontFamilyClass =  fontFamilyClass
     this.ascent = ascent
     this.descent = descent
 
@@ -180,6 +183,7 @@ export default class Font {
   convertFonts ({dist = './', fontTypes = ['eot', 'woff2', 'woff', 'ttf', 'svg'], css = true, symbol = true, html = true, fontCdnUrl = ''}) {
     const fontName = this.fontName
     const fontFamily = this.fontFamily
+    const fontFamilyClass = this.fontFamilyClass
     const glyphs = this.glyphs
     fontTypes.map( format => {
       switch (format) {
@@ -202,7 +206,7 @@ export default class Font {
     })
 
     if(css && fontTypes.length > 0){
-      const CSSTMPL = fontCSSTemplate(fontTypes, fontName, fontFamily, glyphs, fontCdnUrl)
+      const CSSTMPL = fontCSSTemplate(fontTypes, fontName, fontFamily, fontFamilyClass, glyphs, fontCdnUrl)
       fs.writeFileSync(path.join(dist, `${fontName}.css`), CSSTMPL)
     }
 
@@ -212,7 +216,7 @@ export default class Font {
     }
 
     if(html && fontTypes.length > 0){
-      const HTMLTMPL = htmlTemplate(fontTypes, fontName, glyphs)
+      const HTMLTMPL = htmlTemplate(fontTypes, fontName, fontFamilyClass, glyphs)
       fs.writeFileSync(path.join(dist, `${fontName}.html`), HTMLTMPL)
     }
   }

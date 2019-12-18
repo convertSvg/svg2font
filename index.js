@@ -16,11 +16,12 @@ const fs = require('fs')
 // })
 
 const icon = fs.readFileSync(path.join( './test/svgicon', `icon_7days.svg`), 'utf8')
-const icon1 = fs.readFileSync(path.join( './test/svgicon', `icon_search.svg`), 'utf8')
+const icon1 = fs.readFileSync(path.join( './test/svgicon', `icon_postage.svg`), 'utf8')
 console.error('icon', icon)
 const font = new Font({
   fontName: 'svg2font',
   fontFamily: 'iconfont',
+  fontFamilyClass: 'iconfont',
   // glyphSvgs: [icon, icon1],  // string array object
   glyphSvgs: {'icon_7days': { path: icon, originName: 'icon_7days1' }, 'icon_hour': { path: icon1 , originName: 'icon_7days1' }},  // string array object
   ascent: 896,
