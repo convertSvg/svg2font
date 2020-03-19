@@ -1016,7 +1016,7 @@ class Font {
     }
     getWOFF() {
         const ttfBuffer = this.getTTF();
-        return ttf2woff(ttfBuffer);
+        return Buffer.from(ttf2woff(ttfBuffer).buffer);
     }
     getWOFF2() {
         const ttfBuffer = this.getTTF();
