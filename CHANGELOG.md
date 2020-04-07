@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.10](https://github.com/convertSvg/svg-to-fonts/compare/v0.1.9...v0.1.10) (2020-04-07)
+
+
+### Features
+
+* **xml:** fixed xml comment ([bf82a6c](https://github.com/convertSvg/svg-to-fonts/commit/bf82a6c4635814bf4398a0daf12a90d203e01781))
+
 ### [0.1.9](https://github.com/convertSvg/svg-to-fonts/compare/v0.1.8...v0.1.9) (2020-04-07)
 
 
