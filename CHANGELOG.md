@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.6](https://github.com/convertSvg/svg-to-fonts/compare/v0.1.5...v0.1.6) (2020-04-07)
+
+
+### Features
+
+* **font:** add AndroidTemplate iOSTemplate ([e2436be](https://github.com/convertSvg/svg-to-fonts/commit/e2436be99e20c336f019ffda3dab374a4f190891))
+
 ### [0.1.5](https://github.com/convertSvg/svg-to-fonts/compare/v0.1.4...v0.1.5) (2020-03-19)
 
 ### 0.1.4 (2020-03-19)
