@@ -796,7 +796,7 @@ export function AndroidTemplate(fontName, glyphs = []) {
   const AndroidTMPL = `<?xml version="1.0" encoding="utf-8"?>
   <resources>
   ${
-    glyphs.map(({glyphName, unicode}) => `<string name="${glyphName.replace(/-/g, '_').toLowerCase()}">&#x${unicode};</string>`).join('\n  ')
+    glyphs.map(({glyphName, originName, unicode}) => `<string name="${glyphName.replace(/-/g, '_').toLowerCase()}">&#x${unicode};</string> // ${originName}`).join('\n  ')
   }
   </resources>`
   return AndroidTMPL
@@ -820,9 +820,20 @@ export function iOSTemplate(fontFamily, glyphs = []) {
   NSString * const JDIF_${upCaseFontFamily} = @"${fontFamily}";
 
   ${
-    glyphs.map(({glyphName, originName, unicode}) => `NSString * const JDIF_${glyphName.replace(/-/g, '_').toUpperCase()} = @"\U0000${unicode}";`).join('\n  ')
+    glyphs.map(({glyphName, originName, unicode}) => `NSString * const JDIF_${glyphName.replace(/-/g, '_').toUpperCase()} = @"\U0000${unicode}"; // ${originName}`).join('\n  ')
   }
 
   #endif`
   return iOSTMPL
+}
+
+
+export function RNTemplate(fontFamily, glyphs = []) {
+  const upCaseFontFamily = fontFamily.replace(fontFamily[0], fontFamily[0].toUpperCase())
+  const RNTMPL = `export default {
+  ${
+    glyphs.map(({glyphName, originName, unicode}) => `'${glyphName}': ${parseInt(unicode, 16)},// ${originName}`).join('\n  ')
+  }
+}`
+  return RNTMPL
 }
