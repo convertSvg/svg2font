@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.9](https://github.com/convertSvg/svg-to-fonts/compare/v0.1.8...v0.1.9) (2020-04-07)
+
+
+### Features
+
+* **rn:** 增加 rn 模版列表文件 ([a39fa56](https://github.com/convertSvg/svg-to-fonts/commit/a39fa56269b43eba635bb0d8ea760b2dd0695fee))
+
 ### [0.1.8](https://github.com/convertSvg/svg-to-fonts/compare/v0.1.6...v0.1.8) (2020-04-07)
 
 ### [0.1.6](https://github.com/convertSvg/svg-to-fonts/compare/v0.1.5...v0.1.6) (2020-04-07)
