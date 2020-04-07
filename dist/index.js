@@ -880,7 +880,7 @@ function htmlTemplate(fontTypes, fontName, fontFamilyClass, glyphs = []) {
 function AndroidTemplate(fontName, glyphs = []) {
     const AndroidTMPL = `<?xml version="1.0" encoding="utf-8"?>
   <resources>
-  ${glyphs.map(({ glyphName, originName, unicode }) => `<string name="${glyphName.replace(/-/g, '_').toLowerCase()}">&#x${unicode};</string> // ${originName}`).join('\n  ')}
+  ${glyphs.map(({ glyphName, originName, unicode }) => `<string name="${glyphName.replace(/-/g, '_').toLowerCase()}">&#x${unicode};</string> <!--${originName}-->`).join('\n  ')}
   </resources>`;
     return AndroidTMPL;
 }
