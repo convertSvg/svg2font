@@ -792,3 +792,37 @@ export function htmlTemplate(fontTypes, fontName, fontFamilyClass, glyphs = []) 
 }
 
 
+export function AndroidTemplate(fontName, glyphs = []) {
+  const AndroidTMPL = `<?xml version="1.0" encoding="utf-8"?>
+  <resources>
+  ${
+    glyphs.map(({glyphName, unicode}) => `<string name="${glyphName.replace(/-/g, '_').toLowerCase()}">&#x${unicode};</string>`).join('\n  ')
+  }
+  </resources>`
+  return AndroidTMPL
+}
+
+
+export function iOSTemplate(fontFamily, glyphs = []) {
+  const upCaseFontFamily = fontFamily.replace(fontFamily[0], fontFamily[0].toUpperCase())
+  const iOSTMPL = `
+  //
+  // JDIF_${upCaseFontFamily}.h
+  // fontFamily:${fontFamily}
+  //
+  // Version 1.0
+  // Copyright (C) 2019 by original authors @ master Gao
+  //
+
+  #ifndef JDIF_${upCaseFontFamily}_H
+  #define JDIF_${upCaseFontFamily}_H
+
+  NSString * const JDIF_${upCaseFontFamily} = @"${fontFamily}";
+
+  ${
+    glyphs.map(({glyphName, originName, unicode}) => `NSString * const JDIF_${glyphName.replace(/-/g, '_').toUpperCase()} = @"\U0000${unicode}";`).join('\n  ')
+  }
+
+  #endif`
+  return iOSTMPL
+}

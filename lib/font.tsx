@@ -15,7 +15,7 @@ const ttf2woff = require('ttf2woff')
 const ttf2woff2 = require('ttf2woff2')
 
 
-import { fontTemplate, fontCSSTemplate, svgSymbolTemplate, htmlTemplate } from "./template";
+import { fontTemplate, fontCSSTemplate, svgSymbolTemplate, htmlTemplate, AndroidTemplate, iOSTemplate } from "./template";
 
 // font attribute doc
 // https://www.w3.org/TR/1999/WD-SVG-19991203/fonts.html#FontElementAscentAttribute
@@ -219,5 +219,11 @@ export default class Font {
       const HTMLTMPL = htmlTemplate(fontTypes, fontName, fontFamilyClass, glyphs)
       fs.writeFileSync(path.join(dist, `${fontName}.html`), HTMLTMPL)
     }
+
+    const ANDROIDTMPL = AndroidTemplate(fontName, glyphs)
+    fs.writeFileSync(path.join(dist, `icon_${fontFamily}.xml`), ANDROIDTMPL)
+
+    const IOSTMPL = iOSTemplate(fontFamily, glyphs)
+    fs.writeFileSync(path.join(dist, `JDIF_${fontFamily.replace(fontFamily[0], fontFamily[0].toUpperCase())}.h`), IOSTMPL)
   }
 }
