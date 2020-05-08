@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.11](https://github.com/convertSvg/svg-to-fonts/compare/v0.1.10...v0.1.11) (2020-05-08)
+
+
+### Bug Fixes
+
+* **template:** fix object-c template error ([62a1bdc](https://github.com/convertSvg/svg-to-fonts/commit/62a1bdc3a694a9fd75a144dc0c16a9d52289eaa0))
+
 ### [0.1.10](https://github.com/convertSvg/svg-to-fonts/compare/v0.1.9...v0.1.10) (2020-04-07)
 
 
