@@ -820,7 +820,7 @@ export function iOSTemplate(fontFamily, glyphs = []) {
   NSString * const JDIF_${upCaseFontFamily} = @"${fontFamily}";
 
   ${
-    glyphs.map(({glyphName, originName, unicode}) => `NSString * const JDIF_${glyphName.replace(/-/g, '_').toUpperCase()} = @"\U0000${unicode}"; // ${originName}`).join('\n  ')
+    glyphs.map(({glyphName, originName, unicode}) => `NSString * const JDIF_${glyphName.replace(/-/g, '_').toUpperCase()} = @"\\U0000${unicode}"; // ${originName}`).join('\n  ')
   }
 
   #endif`
