@@ -1,22 +1,23 @@
 {
   "rules":  {
-    "jsx-self-close": true,
     "object-literal-sort-keys": false,
     "interface-name" : [true, "never-prefix"],
     "array-type": false,
     "ordered-imports": false,
-    "jsx-no-lambda": false,
     "member-access": false,
     "no-empty": false,
     "no-console": false,
-    "type-literal-delimiter": false
+    "type-literal-delimiter": false,
+    "no-unused-expressions": false,
+    "no-var-requires": false,
+    "curly": false
   },
-  "jsRules": { //Disable for javascript
+  "jsRules": {
     "object-literal-sort-keys": false,
     "no-empty": false,
     "no-console": false
   },
-  "extends": ["tslint:recommended", "tslint-react", "tslint-config-prettier"],
+  "extends": ["tslint:recommended", "tslint-config-prettier"],
   "linterOptions": {
     "exclude": [
       "config/**/*.js",

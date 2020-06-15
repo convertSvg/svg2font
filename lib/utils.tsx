@@ -10,6 +10,7 @@ export function unicodeToCodePoint (code) {
   return parseInt(code, 16)
 }
 
+
 /**
  * unicode 转 string
  * @param {*} code 十六进制
@@ -48,7 +49,7 @@ export function utf8ToString (code) {
 // eslint-disable-next-line no-unused-vars
 export function writeToFile (data, path, calllback?:() => void) {
   if(typeof data === 'object')data = JSON.stringify(data, null, '\t')
-  fs.writeFile(path, data, 'utf-8', function (err) {
+  fs.writeFile(path, data, 'utf-8', err => {
     if (err) throw err
     calllback && calllback()
   })

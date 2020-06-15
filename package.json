@@ -5,11 +5,13 @@
   "main": "./dist/index.js",
   "scripts": {
     "start": "npx rollup -c && node index.js",
+    "test": "jest --coverage",
     "deploy:prod": "standard-version --release-as patch && git push --follow-tags origin HEAD"
   },
   "husky": {
     "hooks": {
-      "commit-msg": "commitlint -e $GIT_PARAMS"
+      "pre-commit": "ts-jest",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   },
   "types": "./index.d.ts",
@@ -30,14 +32,18 @@
   "devDependencies": {
     "@commitlint/cli": "^7.6.1",
     "@commitlint/config-conventional": "^7.6.0",
+    "@types/jest": "^26.0.0",
     "husky": "^2.2.0",
+    "lint-staged": "^10.2.10",
     "rollup": "^1.11.3",
     "rollup-plugin-commonjs": "^9.3.4",
     "rollup-plugin-node-resolve": "^4.2.4",
     "rollup-plugin-typescript": "^1.0.1",
     "standard-version": "^7.0.1",
+    "ts-jest": "^26.1.0",
     "tslib": "^1.9.3",
     "tslint": "^5.16.0",
+    "tslint-config-prettier": "^1.18.0",
     "typescript": "^3.4.5"
   },
   "repository": {
