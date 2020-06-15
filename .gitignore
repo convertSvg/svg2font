@@ -13,3 +13,4 @@ project.config.json
 .eslintcache
 .babelrc
 .tslintignore
+coverage

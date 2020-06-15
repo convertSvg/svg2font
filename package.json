@@ -10,7 +10,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "ts-jest",
+      "pre-commit": "jest",
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   },
@@ -34,6 +34,7 @@
     "@commitlint/config-conventional": "^7.6.0",
     "@types/jest": "^26.0.0",
     "husky": "^2.2.0",
+    "jest": "^26.0.1",
     "lint-staged": "^10.2.10",
     "rollup": "^1.11.3",
     "rollup-plugin-commonjs": "^9.3.4",

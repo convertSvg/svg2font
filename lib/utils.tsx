@@ -1,7 +1,7 @@
 const fs = require('fs')
 
 /**
- * unicode 转 string
+ * 十六进制转十进制，获取码值
  * @param {*} code 十六进制
  * utf-8 编码格式 如 0x2001  unicode 编码格式 \u2001
  * str.charCodeAt(0) Unicode 编码值 20013
@@ -12,8 +12,8 @@ export function unicodeToCodePoint (code) {
 
 
 /**
- * unicode 转 string
- * @param {*} code 十六进制
+ * 十进制转十六进制
+ * @param {*} code 十进制
  * utf-8 编码格式 如 0x2001  unicode 编码格式 \u2001
  * str.charCodeAt(0) Unicode 编码值 20013
  */
@@ -23,7 +23,7 @@ export function codePointToUnicode (codePoint) {
 
 
 /**
- * unicode 转 string
+ * unicode 转 string，根据码值获取对应字符
  * @param {*} code 十六进制
  * utf-8 编码格式 如 0x2001  unicode 编码格式 \u2001
  * str.charCodeAt(0) Unicode 编码值 20013
