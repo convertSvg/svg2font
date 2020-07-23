@@ -29,7 +29,7 @@ function __awaiter(thisArg, _arguments, P, generator) {
 
 const fs = require('fs');
 /**
- * unicode 转 string
+ * 十六进制转十进制，获取码值
  * @param {*} code 十六进制
  * utf-8 编码格式 如 0x2001  unicode 编码格式 \u2001
  * str.charCodeAt(0) Unicode 编码值 20013
@@ -148,7 +148,7 @@ function fontCSSTemplate(fontTypes, fontName, fontFamily, fontFamilyClass, glyph
     -moz-osx-font-smoothing: grayscale;
   }
   ${glyphs.map(({ glyphName, unicode }) => `
-  .${glyphName}:before {
+  .${glyphName}::before {
     content: "\\${unicode}";
   }`).join('\n')}`;
     return CSSTMPL;
@@ -901,7 +901,7 @@ function iOSTemplate(fontFamily, glyphs = []) {
 
   NSString * const JDIF_${upCaseFontFamily} = @"${fontFamily}";
 
-  ${glyphs.map(({ glyphName, originName, unicode }) => `NSString * const JDIF_${glyphName.replace(/-/g, '_').toUpperCase()} = @"\\U0000${unicode}"; // ${originName}`).join('\n  ')}
+  ${glyphs.map(({ glyphName, originName, unicode }) => `NSString * const JDIF_${glyphName.replace(/-/g, '_').toUpperCase()} = @"\\U${unicode.padStart(8, 0)}"; // ${originName}`).join('\n  ')}
 
   #endif`;
     return iOSTMPL;

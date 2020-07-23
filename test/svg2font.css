@@ -17,10 +17,10 @@
     -moz-osx-font-smoothing: grayscale;
   }
   
-  .icon_7days:before {
+  .icon_7days::before {
     content: "\e975";
   }
 
-  .icon_hour:before {
+  .icon_hour::before {
     content: "\e973";
   }

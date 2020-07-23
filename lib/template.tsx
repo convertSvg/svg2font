@@ -50,7 +50,7 @@ export function fontCSSTemplate(fontTypes, fontName, fontFamily, fontFamilyClass
     -moz-osx-font-smoothing: grayscale;
   }
   ${ glyphs.map(({glyphName, unicode}) => `
-  .${glyphName}:before {
+  .${glyphName}::before {
     content: "\\${unicode}";
   }`).join('\n')}`
   return CSSTMPL
@@ -820,7 +820,7 @@ export function iOSTemplate(fontFamily, glyphs = []) {
   NSString * const JDIF_${upCaseFontFamily} = @"${fontFamily}";
 
   ${
-    glyphs.map(({glyphName, originName, unicode}) => `NSString * const JDIF_${glyphName.replace(/-/g, '_').toUpperCase()} = @"\\U0000${unicode}"; // ${originName}`).join('\n  ')
+    glyphs.map(({glyphName, originName, unicode}) => `NSString * const JDIF_${glyphName.replace(/-/g, '_').toUpperCase()} = @"\\U${unicode.padStart(8, 0)}"; // ${originName}`).join('\n  ')
   }
 
   #endif`
