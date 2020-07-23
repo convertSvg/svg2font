@@ -1,6 +1,6 @@
 {
   "name": "svg-to-fonts",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "description": "Converts SVG to font format.",
   "main": "./dist/index.js",
   "scripts": {

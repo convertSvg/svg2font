@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.13](https://github.com/convertSvg/svg-to-fonts/compare/v0.1.12...v0.1.13) (2020-07-23)
+
+
+### Features
+
+* add coverage ([de13c63](https://github.com/convertSvg/svg-to-fonts/commit/de13c6377bbbe2ebfc841d88abd102b46e4da1ed))
+* add jest test ([42573bd](https://github.com/convertSvg/svg-to-fonts/commit/42573bd66ef2d9495d187e2f552d341a883db0c5))
+
+
+### Bug Fixes
+
+* **template:** 修复 iOS 头文件 Unicode 编码模板问题 ([229a01c](https://github.com/convertSvg/svg-to-fonts/commit/229a01cabdda9aad9a7f2c7b4e8943875f0df508))
+
 ### [0.1.12](https://github.com/convertSvg/svg-to-fonts/compare/v0.1.11...v0.1.12) (2020-05-09)
 
 
